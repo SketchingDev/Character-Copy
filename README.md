@@ -9,11 +9,9 @@ Character Copy is a KeePass plugin that integrates into KeePass' entry menu and 
 
 ## Usage
 1. Right-click on an entry to bring up its context menu.  
-   ![](http://www.flyingtophat.co.uk/images/69t.jpg)
 2. Hover over the "Copy Character(s)" item to show the entry's protected fields.
 3. Click on the protected field you want to copy characters from.
-4. Use the window that appears to provide the position of the character you want to copy.  
-   ![](http://www.flyingtophat.co.uk/images/70t.jpg)
+4. Use the window that appears to provide the positions of the characters you want to copy.  
 5. Click on the button to copy the character to the clipboard.
 6. When you've finished copying characters just close the window.
 

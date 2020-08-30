@@ -16,6 +16,11 @@
 //    along with this program; if not, write to the Free Software
 //    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // </copyright>
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace CharacterCopy
 {
     using System;
@@ -28,8 +33,9 @@ namespace CharacterCopy
 
     public partial class CharacterSelectorForm : Form
     {
-        private IPluginHost host;
-        private ProtectedString protectedString;
+        private readonly Regex COMMA_SEPARATED_NUMBERS_REGEXP = new Regex("^[0-9][0-9]*(,[0-9][0-9]*)*$");
+        private readonly IPluginHost host;
+        private readonly ProtectedString protectedString;
 
         private CharacterSelectorForm()
         {
@@ -54,49 +60,15 @@ namespace CharacterCopy
             
             if (this.protectedString.Length > 0)
             {
-                // Limit range to the length of the protected string
-                this.SetNumericUpDownRange(1, this.protectedString.Length);
-                this.copyToClipboardButton.Enabled = true;
+                this.copyMultipleCharacters.Enabled = true;
             }
             else
             {
-                // Disable control
-                this.SetNumericUpDownRange(0, 0);
-                this.copyToClipboardButton.Enabled = false;
+                this.copyMultipleCharacters.Enabled = false;
             }
         }
 
-        public void SetNumericUpDownRange(decimal min, decimal max)
-        {
-            this.charToCopyNumericUpDown.Minimum = min;
-            this.charToCopyNumericUpDown.Maximum = max;
-        }
-
-        /// <summary>
-        /// Copies the character at the chosen position from the protected string 
-        /// to the user's clipboard then starts the clipboard countdown
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void copyToClipboardButton_Click(object sender, System.EventArgs e)
-        {
-            int characterPosition = decimal.ToInt32(this.charToCopyNumericUpDown.Value);
-
-            // Check valid position then copy to clipboard
-            if ((characterPosition >= 1) && (characterPosition <= this.protectedString.Length))
-            {
-                char character = this.CopyProtectedCharacter(
-                        this.protectedString,
-                        characterPosition);
-
-                if (this.CopyCharToClipboard(character))
-                {
-                    this.host.MainWindow.StartClipboardCountdown();
-                }
-            }
-        }
-
-        private char CopyProtectedCharacter(ProtectedString protectedString, int position)
+        private char CopyProtectedCharacter(int position)
         {
             // Read bytes of protected string, then extract required character
             byte[] procStringUtf8 = this.protectedString.ReadUtf8();
@@ -111,14 +83,61 @@ namespace CharacterCopy
             return characters[0];
         }
 
-        private bool CopyCharToClipboard(char character)
+        private bool CopyToClipboard(String characters)
         {
             return ClipboardUtil.CopyAndMinimize(
-                    character.ToString(),
-                    false,
-                    this,
-                    null,
-                    null);
+                characters,
+                false,
+                this,
+                null,
+                null);
         }
+
+        private void CopyMultipleCharacters_Click(object sender, EventArgs e)
+        {
+            String multipleCharacters = multipleCharactersText.Text;
+            
+            if (!COMMA_SEPARATED_NUMBERS_REGEXP.IsMatch(multipleCharacters))
+            {
+                MessageBox.Show(PluginStrings.CharactersPositionsInvalidFormat);
+                return;
+            }
+            List<int> charPositionsToCopy = SplitCharactersByCommaAndSort(multipleCharacters);
+            int lastCharPositionToCopy = charPositionsToCopy.Last();
+            
+            if (protectedString.Length < lastCharPositionToCopy)
+            {
+                MessageBox.Show(String.Format(PluginStrings.CharacterPositionExceedesBoundaries, lastCharPositionToCopy, protectedString.Length));
+                return;
+            }
+            
+            CopyChosenCharactersToClipboard(charPositionsToCopy);
+        }
+
+        private static List<int> SplitCharactersByCommaAndSort(string multipleCharacters)
+        {
+            List<int> charPositionsToCopy = new List<int>();
+            foreach (var charToCopy in multipleCharacters.Split(','))
+            {
+                charPositionsToCopy.Add(int.Parse(charToCopy));
+            }
+
+            charPositionsToCopy.Sort();
+            return charPositionsToCopy;
+        }
+
+        private void CopyChosenCharactersToClipboard(List<int> charPositionsToCopy)
+        {
+            StringBuilder chosenCharactersFromPassword = new StringBuilder();
+            foreach (var charPosition in charPositionsToCopy)
+            {
+                chosenCharactersFromPassword.Append(CopyProtectedCharacter(charPosition));
+            }
+            if (CopyToClipboard(chosenCharactersFromPassword.ToString()))
+            {
+                host.MainWindow.StartClipboardCountdown();
+            }
+        }
+
     }
 }

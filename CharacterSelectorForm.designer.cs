@@ -28,75 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.copyToClipboardButton = new System.Windows.Forms.Button();
-            this.charToCopyNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.positionLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.charToCopyNumericUpDown)).BeginInit();
+            this.copyMultipleCharacters = new System.Windows.Forms.Button();
+            this.multipleCharactersText = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // copyToClipboardButton
+            // copyMultipleCharacters
             // 
-            this.copyToClipboardButton.Location = new System.Drawing.Point(12, 47);
-            this.copyToClipboardButton.Name = "copyToClipboardButton";
-            this.copyToClipboardButton.Size = new System.Drawing.Size(149, 30);
-            this.copyToClipboardButton.TabIndex = 1;
-            this.copyToClipboardButton.Text = "Copy to clipboard";
-            this.copyToClipboardButton.UseVisualStyleBackColor = true;
-            this.copyToClipboardButton.Click += new System.EventHandler(this.copyToClipboardButton_Click);
+            this.copyMultipleCharacters.Location = new System.Drawing.Point(69, 94);
+            this.copyMultipleCharacters.Name = "copyMultipleCharacters";
+            this.copyMultipleCharacters.Size = new System.Drawing.Size(149, 30);
+            this.copyMultipleCharacters.TabIndex = 3;
+            this.copyMultipleCharacters.Text = "Copy to clipboard";
+            this.copyMultipleCharacters.UseVisualStyleBackColor = true;
+            this.copyMultipleCharacters.Click += new System.EventHandler(this.CopyMultipleCharacters_Click);
             // 
-            // charToCopyNumericUpDown
+            // multipleCharactersText
             // 
-            this.charToCopyNumericUpDown.Location = new System.Drawing.Point(81, 10);
-            this.charToCopyNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.charToCopyNumericUpDown.Name = "charToCopyNumericUpDown";
-            this.charToCopyNumericUpDown.Size = new System.Drawing.Size(80, 25);
-            this.charToCopyNumericUpDown.TabIndex = 0;
-            this.charToCopyNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.multipleCharactersText.Location = new System.Drawing.Point(11, 54);
+            this.multipleCharactersText.Name = "multipleCharactersText";
+            this.multipleCharactersText.Size = new System.Drawing.Size(267, 25);
+            this.multipleCharactersText.TabIndex = 4;
             // 
-            // positionLabel
+            // label1
             // 
-            this.positionLabel.AutoSize = true;
-            this.positionLabel.Location = new System.Drawing.Point(9, 13);
-            this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(66, 17);
-            this.positionLabel.TabIndex = 2;
-            this.positionLabel.Text = "Position #";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(247, 34);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Positions of characters to copy \r\n(multiple positions separated by comma)";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // CharacterSelectorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(173, 87);
-            this.Controls.Add(this.positionLabel);
-            this.Controls.Add(this.charToCopyNumericUpDown);
-            this.Controls.Add(this.copyToClipboardButton);
-            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(290, 127);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.multipleCharactersText);
+            this.Controls.Add(this.copyMultipleCharacters);
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Location = new System.Drawing.Point(15, 15);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CharacterSelectorForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select Character";
-            ((System.ComponentModel.ISupportInitialize)(this.charToCopyNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
-        #endregion
+        private System.Windows.Forms.TextBox multipleCharactersText;
 
-        private System.Windows.Forms.Button copyToClipboardButton;
-        private System.Windows.Forms.NumericUpDown charToCopyNumericUpDown;
-        private System.Windows.Forms.Label positionLabel;
+        private System.Windows.Forms.Button copyMultipleCharacters;
+
+        private System.Windows.Forms.Label label1;
+
+        #endregion
     }
 }
