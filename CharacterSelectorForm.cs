@@ -20,6 +20,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
+using KeePass;
+using KeePassLib;
 
 namespace CharacterCopy
 {
@@ -139,5 +142,23 @@ namespace CharacterCopy
             }
         }
 
+        private void AutoType_Click(object sender, EventArgs e)
+        {
+            performAutoType(ClipboardUtil.GetText());
+        }
+        
+        private void performAutoType(String chosenCharactersFromPassword)
+        {
+            //Needs for printing special chars
+            String passwordElement = chosenCharactersFromPassword.Replace("~", "{~}")
+                .Replace("+", "{+}")
+                .Replace("^", "{^}")
+                .Replace("%", "{%}");
+            
+            PwEntry pe = new PwEntry(false, false);
+            pe.AutoType.Enabled = true;
+            Thread.Sleep(3000);
+            AutoType.PerformIntoCurrentWindow(pe, Program.MainForm.DocumentManager.FindContainerOf(pe), passwordElement);
+        }
     }
 }

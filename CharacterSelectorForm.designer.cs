@@ -31,13 +31,14 @@
             this.copyMultipleCharacters = new System.Windows.Forms.Button();
             this.multipleCharactersText = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.AutoTypeBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // copyMultipleCharacters
             // 
-            this.copyMultipleCharacters.Location = new System.Drawing.Point(69, 94);
+            this.copyMultipleCharacters.Location = new System.Drawing.Point(11, 95);
             this.copyMultipleCharacters.Name = "copyMultipleCharacters";
-            this.copyMultipleCharacters.Size = new System.Drawing.Size(149, 30);
+            this.copyMultipleCharacters.Size = new System.Drawing.Size(127, 30);
             this.copyMultipleCharacters.TabIndex = 3;
             this.copyMultipleCharacters.Text = "Copy to clipboard";
             this.copyMultipleCharacters.UseVisualStyleBackColor = true;
@@ -60,12 +61,23 @@
             this.label1.Text = "Positions of characters to copy \r\n(multiple positions separated by comma)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // AutoTypeBtn
+            // 
+            this.AutoTypeBtn.Location = new System.Drawing.Point(154, 95);
+            this.AutoTypeBtn.Name = "AutoTypeBtn";
+            this.AutoTypeBtn.Size = new System.Drawing.Size(124, 30);
+            this.AutoTypeBtn.TabIndex = 6;
+            this.AutoTypeBtn.Text = "Perform auto type";
+            this.AutoTypeBtn.UseVisualStyleBackColor = true;
+            this.AutoTypeBtn.Click += new System.EventHandler(this.AutoType_Click);
+            // 
             // CharacterSelectorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(290, 127);
+            this.Controls.Add(this.AutoTypeBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.multipleCharactersText);
             this.Controls.Add(this.copyMultipleCharacters);
@@ -81,6 +93,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button AutoTypeBtn;
 
         private System.Windows.Forms.TextBox multipleCharactersText;
 

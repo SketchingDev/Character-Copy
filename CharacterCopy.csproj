@@ -63,6 +63,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CharacterSelectorForm.resx">
+      <DependentUpon>CharacterSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PluginStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PluginStrings.Designer.cs</LastGenOutput>
