@@ -126,4 +126,10 @@
   <data name="MenuItemText" xml:space="preserve">
     <value>Copy Character(s)</value>
   </data>
+  <data name="CharactersPositionsInvalidFormat" xml:space="preserve">
+    <value>Invalid format for multiple characters to copy. That should be comma separated numbers (e.g. 1,2)</value>
+  </data>
+  <data name="CharacterPositionExceedesBoundaries" xml:space="preserve">
+    <value>Char position :{0} exceedes boundaries: {1} of password to copy</value>
+  </data>
 </root>
