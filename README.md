@@ -15,10 +15,14 @@ The plugin provides the basic functionality provided by the [PICKCHARS placehold
 
 ## Usage
 1. Right-click on an entry to bring up its context menu
+
     ![](./doc/pin-location.jpg)
+
 2. Hover over the 'Copy Character(s)' item to show the entry's protected fields
 3. Click on the protected field you want to copy characters from
 4. Use the window that appears to provide the position of the character you want to copy  
+
     ![](./doc/copy-to-clipboard.jpg)
+
 5. Click on the button to copy the character to the clipboard.
 6. When you've finished copying characters just close the window.
