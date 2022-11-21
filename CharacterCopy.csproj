@@ -38,7 +38,9 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-  	<Reference Include="KeePass" />
+    <Reference Include="KeePass">
+      <HintPath>C:\Program Files\KeePass Password Safe 2\KeePass.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
